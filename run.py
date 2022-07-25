@@ -26,9 +26,23 @@ def begin_program():
     while True:
         print('Welcome to your Survey Response Handler. \n')
         first_response = input(
-            'Would you like to see the latest form responses? y/n\n')
+            'Would you like to check for new responses? y/n\n')
         if validate_str_input(first_response):
-            break
+            if first_response == 'y':
+                print('Checking worksheet for added responses...')
+                previous_responses = int(response_counter())
+                print(previous_responses)
+                new_responses = check_response_data()
+                print(new_responses)
+                if new_responses > previous_responses:
+                    print('yes')
+                    print('There new responses\n')
+                    print('Would you like to see them?\n')
+                    second_response = input('y/n: \n')
+                break
+            elif first_response == 'n':
+                print('Closing the program')
+                break
 
 
 def validate_str_input(user_input):
@@ -44,10 +58,24 @@ def validate_str_input(user_input):
     return True
 
 
+def response_counter():
+    """
+    Keeps a running total of how many responses there
+    have been and returns this value.
+    """
+    # all_values = SHEET.worksheet('Form Responses').get_all_values()
+    # row_total = int(len(all_values)) - 1
+    # row_total = check_response_data()
+    # SHEET.worksheet('Form Responses').update_acell('AB2', row_total)
+    val = SHEET.worksheet('Form Responses').acell('AB2').value
+    return val
+
+
 def check_response_data():
     """
     Access the form responses and count the number of rows
     """
+    # existing_responses = int(response_counter())
     all_values = SHEET.worksheet('Form Responses').get_all_values()
     row_count = int(len(all_values)) - 1
     return row_count
