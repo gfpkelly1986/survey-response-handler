@@ -28,20 +28,26 @@ def begin_program():
         first_response = input(
             'Would you like to check for new responses? y/n\n')
         if validate_str_input(first_response):
-            if first_response == 'y':
+            if first_response in ['y', 'Y']:
                 print('Checking worksheet for added responses...')
                 previous_responses = int(response_counter())
                 print(previous_responses)
                 new_responses = check_response_data()
                 print(new_responses)
                 if new_responses > previous_responses:
-                    print('yes')
-                    print('There new responses\n')
-                    print('Would you like to see them?\n')
-                    second_response = input('y/n: \n')
-                break
-            elif first_response == 'n':
-                print('Closing the program')
+                    print('There are new responses to your survey.\n')
+                    print('Would you like to see them in a table?\n')
+                    second_response = input('y/n')
+                    if validate_str_input(second_response):
+                        if second_response in ['y', 'Y']:
+                            # show_full_responses()
+                            print('Getting table')
+                        else:
+                            print('Closing the program 1...')
+                            # close_program()
+                            break
+            elif first_response in ['n', 'N']:
+                print('Closing program 2')
                 break
 
 
