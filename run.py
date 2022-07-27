@@ -4,6 +4,7 @@
 
 import gspread
 from google.oauth2.service_account import Credentials
+from tabulate import tabulate
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -20,7 +21,7 @@ SHEET = GSPREAD_CLIENT.open('SurveyResponseForm')
 def begin_program():
     """
     This function will run, welcome the user and take a response from them
-    If they want to see their form responses it will call check_response_data
+    If they want to see their form responses it will call get_row_count
     If not it will close the program
     """
     while True:
@@ -32,19 +33,20 @@ def begin_program():
                 print('Checking worksheet for added responses...')
                 previous_responses = int(response_counter())
                 print(previous_responses)
-                new_responses = check_response_data()
+                new_responses = get_row_count()
                 print(new_responses)
                 if new_responses > previous_responses:
                     print('There are new responses to your survey.\n')
-                    print('Would you like to see them in a table?\n')
-                    second_response = input('y/n')
+                    print('Would you like to see them in a table?\n\n')
+                    second_response = input('y/n\n')
+                    print('\n\n')
                     if validate_str_input(second_response):
                         if second_response in ['y', 'Y']:
-                            # show_full_responses()
-                            print('Getting table')
+                            full_form = show_full_responses()
+                            print(full_form)
+                            break
                         else:
-                            print('Closing the program 1...')
-                            # close_program()
+                            close_program()
                             break
             elif first_response in ['n', 'N']:
                 print('Closing program 2')
@@ -71,13 +73,13 @@ def response_counter():
     """
     # all_values = SHEET.worksheet('Form Responses').get_all_values()
     # row_total = int(len(all_values)) - 1
-    # row_total = check_response_data()
+    # row_total = get_row_count()
     # SHEET.worksheet('Form Responses').update_acell('AB2', row_total)
     val = SHEET.worksheet('Form Responses').acell('AB2').value
     return val
 
 
-def check_response_data():
+def get_row_count():
     """
     Access the form responses and count the number of rows
     """
@@ -85,6 +87,24 @@ def check_response_data():
     all_values = SHEET.worksheet('Form Responses').get_all_values()
     row_count = int(len(all_values)) - 1
     return row_count
+
+
+def show_full_responses():
+    """
+    Get all the table responses
+    """
+    print('Hours on Facebook\n')
+    batch_1 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_1')
+
+    return tabulate(batch_1)
+
+
+def close_program():
+    """
+    Function to close the program.
+    """
+    print('Closing the program 1...')
 
 
 def main():
