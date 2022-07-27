@@ -39,13 +39,13 @@ def begin_program():
                     print('There are new responses to your survey.\n')
                     print('Would you like to see them in a table?\n\n')
                     second_response = input('y/n\n')
-                    print('\n\n')
+                    print('\n')
                     if validate_str_input(second_response):
                         if second_response in ['y', 'Y']:
                             full_form = show_full_responses()
                             print(full_form)
                             break
-                        else:
+                        elif second_response in ['n', 'N']:
                             close_program()
                             break
             elif first_response in ['n', 'N']:
@@ -57,7 +57,7 @@ def validate_str_input(user_input):
     """
     Function to validate users input of y or n.
     """
-    str_options = ['y', 'n', 'Y', 'n']
+    str_options = ['y', 'n', 'Y', 'N']
     while user_input not in str_options:
         print(f'Incorrect input: [{user_input}].\n')
         print(f'Valid Input = {str_options}\n')
@@ -93,11 +93,14 @@ def show_full_responses():
     """
     Get all the table responses
     """
-    print('Hours on Facebook\n')
+    print('Table of most recent responses:\n')
     batch_1 = SHEET.worksheet('Form Responses').get_values(
         'Form_Responses_part_1')
+    batch_2 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_2')
+    batched_data = batch_1 + batch_2
 
-    return tabulate(batch_1)
+    return tabulate(batched_data, tablefmt="grid")
 
 
 def close_program():
