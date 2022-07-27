@@ -47,10 +47,10 @@ def begin_program():
                             break
                         elif second_response in ['n', 'N']:
                             close_program()
-                            break
+                            # break
             elif first_response in ['n', 'N']:
-                print('Closing program 2')
-                break
+                close_program()
+                # break
 
 
 def validate_str_input(user_input):
@@ -107,7 +107,8 @@ def close_program():
     """
     Function to close the program.
     """
-    print('Closing the program 1...')
+    print('Closing the program now...')
+    quit()
 
 
 def main():
