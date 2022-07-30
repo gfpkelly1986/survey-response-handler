@@ -5,6 +5,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
+import numpy as np
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -33,7 +34,7 @@ def begin_program():
                 print('Checking worksheet for added responses...')
                 previous_responses = int(response_counter())
                 print(previous_responses)
-                new_responses = get_row_count()
+                new_responses = get_row_count('Form responses 4')
                 print(new_responses)
                 if new_responses > previous_responses:
                     print('There are new responses to your survey.\n')
@@ -49,7 +50,7 @@ def begin_program():
                             break
                         elif second_response in ['n', 'N']:
                             close_program()
-                           
+
             elif first_response in ['n', 'N']:
                 close_program()
 
@@ -93,12 +94,12 @@ def response_counter():
     return val
 
 
-def get_row_count():
+def get_row_count(sheet):
     """
     Access the form responses and count the number of rows
     """
     # existing_responses = int(response_counter())
-    all_values = SHEET.worksheet('Form responses 4').get_all_values()
+    all_values = SHEET.worksheet(sheet).get_all_values()
     row_count = int(len(all_values)) - 1
     return row_count
 
@@ -173,6 +174,20 @@ def populate_tables():
     into smaller tables so they can be analysed
     seperately.
     """
+    hours_spent_values = SHEET.worksheet('Form responses 4').get('B1:F50')
+    SHEET.worksheet('Hours Spent').update('A1:E50', hours_spent_values)
+    number_of_rows = get_row_count('Hours Spent')
+    cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
+    totals = []
+    # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
+    for row in cell_range:
+        for list_of_values in row:
+            total = [(sum(map(int, list_of_values)))]
+            SHEET.worksheet('Hours Spent').update('Total Hours', total)
+            totals.append(total)
+                
+    print(totals)
+    # SHEET.worksheet('Hours Spent').update('Total Hours', [totals])
 
 
 def close_program():
@@ -187,7 +202,8 @@ def main():
     """
     This is the main function that controls the general flow of the program
     """
-    begin_program()
+    # begin_program()
+    populate_tables()
     # present_options()
 
 
