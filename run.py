@@ -44,13 +44,14 @@ def begin_program():
                         if second_response in ['y', 'Y']:
                             full_form = show_full_responses()
                             print(full_form)
+                            SHEET.worksheet('Form responses 4').update(
+                                'W2', new_responses)
                             break
                         elif second_response in ['n', 'N']:
                             close_program()
-                            # break
+                           
             elif first_response in ['n', 'N']:
                 close_program()
-                # break
 
 
 def validate_str_input(user_input):
@@ -61,6 +62,19 @@ def validate_str_input(user_input):
     while user_input not in str_options:
         print(f'Incorrect input: [{user_input}].\n')
         print(f'Valid Input = {str_options}\n')
+        return False
+
+    return True
+
+
+def validate_int_input(user_input):
+    """
+    A function to validate integer inputs
+    """
+    int_options = [1, 2, 3, 4, 4, 6]
+    while user_input not in int_options:
+        print(f'Incorrect input: [{user_input}].\n')
+        print(f'Valid Input = {int_options}\n')
         return False
 
     return True
@@ -121,6 +135,46 @@ def show_full_responses():
     return tabulate(batched_data, tablefmt="grid")
 
 
+def present_options():
+    """
+    A function to display choices of sorted data tables.
+    """
+    print('\nChoose an option below to see organised data.\n\n')
+
+    print('Option 1: Time spent on Social Media per age group')
+
+    user_choice = input('Which table would you like to see?\n')
+
+    if validate_int_input(user_choice):
+        if user_choice == 1:
+            display_table(user_choice)
+        elif user_choice == 2:
+            display_table(user_choice)
+        elif user_choice == 3:
+            display_table(user_choice)
+        elif user_choice == 4:
+            display_table(user_choice)
+        elif user_choice == 5:
+            display_table(user_choice)
+        elif user_choice == 6:
+            display_table(user_choice)
+
+
+def display_table(user_choice):
+    """
+    A function that will pull the correct table of data
+    based on the choice entered by the user.
+    """
+
+
+def populate_tables():
+    """
+    A function to split the main form responses
+    into smaller tables so they can be analysed
+    seperately.
+    """
+
+
 def close_program():
     """
     Function to close the program.
@@ -134,6 +188,7 @@ def main():
     This is the main function that controls the general flow of the program
     """
     begin_program()
+    # present_options()
 
 
 main()
