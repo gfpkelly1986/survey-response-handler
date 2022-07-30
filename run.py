@@ -98,7 +98,24 @@ def show_full_responses():
         'Form_Responses_part_1')
     batch_2 = SHEET.worksheet('Form Responses').get_values(
         'Form_Responses_part_2')
-    batched_data = batch_1 + batch_2
+    batch_3 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_3')
+    batch_4 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_4')
+    batch_5 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_5')
+    batch_6 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_6')
+    batch_7 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_7')
+    batch_8 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_8')
+    batch_9 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_9')
+    batch_10 = SHEET.worksheet('Form Responses').get_values(
+        'Form_Responses_part_10')
+    batched_data = batch_1 + batch_2 + batch_3 + batch_4 + \
+        batch_5 + batch_6 + batch_7 + batch_8 + batch_9 + batch_10
 
     return tabulate(batched_data, tablefmt="grid")
 
