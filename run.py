@@ -75,7 +75,7 @@ def response_counter():
     # row_total = int(len(all_values)) - 1
     # row_total = get_row_count()
     # SHEET.worksheet('Form Responses').update_acell('AB2', row_total)
-    val = SHEET.worksheet('Form Responses').acell('W2').value
+    val = SHEET.worksheet('Form responses 4').acell('W2').value
     return val
 
 
@@ -84,7 +84,7 @@ def get_row_count():
     Access the form responses and count the number of rows
     """
     # existing_responses = int(response_counter())
-    all_values = SHEET.worksheet('Form Responses').get_all_values()
+    all_values = SHEET.worksheet('Form responses 4').get_all_values()
     row_count = int(len(all_values)) - 1
     return row_count
 
@@ -93,26 +93,27 @@ def show_full_responses():
     """
     Get all the table responses
     """
+    print('Getting response data now...\n')
     print('Table of most recent responses:\n')
-    batch_1 = SHEET.worksheet('Form Responses').get_values(
+    batch_1 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_1')
-    batch_2 = SHEET.worksheet('Form Responses').get_values(
+    batch_2 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_2')
-    batch_3 = SHEET.worksheet('Form Responses').get_values(
+    batch_3 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_3')
-    batch_4 = SHEET.worksheet('Form Responses').get_values(
+    batch_4 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_4')
-    batch_5 = SHEET.worksheet('Form Responses').get_values(
+    batch_5 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_5')
-    batch_6 = SHEET.worksheet('Form Responses').get_values(
+    batch_6 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_6')
-    batch_7 = SHEET.worksheet('Form Responses').get_values(
+    batch_7 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_7')
-    batch_8 = SHEET.worksheet('Form Responses').get_values(
+    batch_8 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_8')
-    batch_9 = SHEET.worksheet('Form Responses').get_values(
+    batch_9 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_9')
-    batch_10 = SHEET.worksheet('Form Responses').get_values(
+    batch_10 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_10')
     batched_data = batch_1 + batch_2 + batch_3 + batch_4 + \
         batch_5 + batch_6 + batch_7 + batch_8 + batch_9 + batch_10
