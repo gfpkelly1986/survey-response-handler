@@ -75,7 +75,7 @@ def response_counter():
     # row_total = int(len(all_values)) - 1
     # row_total = get_row_count()
     # SHEET.worksheet('Form Responses').update_acell('AB2', row_total)
-    val = SHEET.worksheet('Form Responses').acell('AB2').value
+    val = SHEET.worksheet('Form Responses').acell('W2').value
     return val
 
 
