@@ -5,7 +5,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
-import numpy as np
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -168,15 +167,16 @@ def display_table(user_choice):
     """
 
 
-def populate_tables():
+def populate_tables(age_list):
     """
     A function to split the main form responses
-    into smaller tables so they can be analysed
+    into smaller tables\worksheets so they can be analysed
     seperately.
     """
+    age_list = get_responder_ages()
     hours_spent_values = SHEET.worksheet('Form responses 4').get('B1:F50')
     SHEET.worksheet('Hours Spent').update('A1:E50', hours_spent_values)
-    age_list = SHEET.worksheet('Hours Spent').get('Age_List')
+    # age_list = SHEET.worksheet('Hours Spent').get('Age_List')
     SHEET.worksheet('Happy').update('A1:A50', age_list)
     SHEET.worksheet('Anxious').update('A1:A50', age_list)
     SHEET.worksheet('Connected').update('A1:A50', age_list)
@@ -189,17 +189,83 @@ def populate_tables():
     SHEET.worksheet('Connected').update('B1:E50', hrs_connected)
     hrs_anxious = SHEET.worksheet('Form responses 4').get('Hrs_Anxious')
     SHEET.worksheet('Anxious').update('B1:E50', hrs_anxious)
-    # number_of_rows = get_row_count('Hours Spent')
+
+
+def get_responder_ages():
+    """
+    A function to get age data from what is your age column.
+    """
+    age_list = SHEET.worksheet('Form responses 4').get('Age_List')
+    print(age_list)
+    return age_list
+
+
+def set_total_hours():
+    """
+    A function to set the totals hours on social media
+    """
     cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
-    totals = []
-    # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
+    list_of_totals = []
     for row in cell_range:
         for list_of_values in row:
             total = [(sum(map(int, list_of_values)))]
-            totals.append(total)
+            list_of_totals.append(total)
+    
+    SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
+    print(list_of_totals)
+    return list_of_totals
 
-    print(totals)
-    SHEET.worksheet('Hours Spent').update('Total_Hours', totals)
+
+# def get_total_hrs():
+#     """
+#     A function to get the total hrs spent on Social
+#     Media from the Hours Spent worksheet.
+#     """
+#     cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
+#     # This list is a list of lists
+#     list_of_totals = []
+#     # This list is a list of integers for calculations
+#     int_totals = []
+#     for row in cell_range:
+#         for list_of_values in row:
+#             total = [(sum(map(int, list_of_values)))]
+#             list_of_totals.append(total)
+#             print(list_of_totals)
+#     for num in list_of_totals:
+#         for val in num:
+#             int_totals.append(val)
+#     print(int_totals)      
+
+#     age_list = get_responder_ages()
+#     age_list = age_list[1:]
+#     print(age_list)
+#     age_ints = []
+#     for val in age_list:
+#         for age in val:
+#             age = int(age)
+#             age_ints.append(age)
+#             print(type(age))
+#     print(age_ints)
+
+#     for num, total in age_ints, int_totals:
+#         if num <= 25 and total > 0:
+#             print(f'{num} Found num <= 25')
+#         elif num <= 45:
+#             print(f'{num} Found num <= 45')
+#         elif num <= 65:
+#             print(f'{num} Found num <= 65')
+    
+    # number_of_rows = get_row_count('Hours Spent')
+    # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
+    
+    # SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
+    # print(list_of_totals)
+    # return list_of_totals
+
+    # cell_range = SHEET.worksheet('Hours Spent').batch_get(['A1:A50'])
+    # list_of_totals = []
+    # for row in cell_range:
+    #     if 
 
 
 def close_program():
@@ -215,8 +281,12 @@ def main():
     This is the main function that controls the general flow of the program
     """
     # begin_program()
-    populate_tables()
+    # age_list = get_responder_ages()
+    # populate_tables(age_list)
     # present_options()
+    # get_responder_ages()
+    # get_total_hrs()
+    set_total_hours()
 
 
 main()
