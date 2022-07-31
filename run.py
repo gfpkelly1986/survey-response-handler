@@ -170,7 +170,7 @@ def display_table(user_choice):
 def populate_tables(age_list):
     """
     A function to split the main form responses
-    into smaller tables\worksheets so they can be analysed
+    into smaller tables\\worksheets so they can be analysed
     seperately.
     """
     age_list = get_responder_ages()
@@ -241,13 +241,26 @@ def combine_age_related_data(list_of_totals):
     print(age_ints)
     print(int_totals)
 
-    cell_value = SHEET.worksheet('Hours Spent').acell('F2').value
-    totals = []
-    for x, y in zip(age_ints, int_totals):
-        if x <= 25 and y > 0:
-            totals.append(int(y))
-           
-    print(sum(totals))
+    totals1 = []
+    totals2 = []
+    totals3 = []
+    for age, total in zip(age_ints, int_totals):
+        if age <= 25 and total > 0:
+            totals1.append(int(total))
+        elif age <= 45 and total > 0:
+            totals2.append(int(total))
+        elif age <= 65 and total > 0:
+            totals3.append(total)
+
+    total_smedia_under25 = str((sum(totals1)))
+    total_smedia_under45 = str((sum(totals2)))
+    total_smedia_under65 = str((sum(totals3)))
+    totals = [[total_smedia_under25], [total_smedia_under45], [total_smedia_under65]]
+    print(totals)
+    SHEET.worksheet('Useful Data').update('Total_Smedia_Hours', totals)
+
+    hours_per_age_group = SHEET.worksheet('Useful Data').get('A31:B35')
+    print(tabulate(hours_per_age_group, tablefmt="grid"))
 
     # number_of_rows = get_row_count('Hours Spent')
     # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
@@ -292,6 +305,6 @@ def main():
     # get_total_hrs()
     list_of_totals = set_total_hours()
     combine_age_related_data(list_of_totals)
-    
+
 
 main()
