@@ -176,18 +176,30 @@ def populate_tables():
     """
     hours_spent_values = SHEET.worksheet('Form responses 4').get('B1:F50')
     SHEET.worksheet('Hours Spent').update('A1:E50', hours_spent_values)
-    number_of_rows = get_row_count('Hours Spent')
+    age_list = SHEET.worksheet('Hours Spent').get('Age_List')
+    SHEET.worksheet('Happy').update('A1:A50', age_list)
+    SHEET.worksheet('Anxious').update('A1:A50', age_list)
+    SHEET.worksheet('Connected').update('A1:A50', age_list)
+    SHEET.worksheet('Informed').update('A1:A50', age_list)
+    hrs_happy = SHEET.worksheet('Form responses 4').get('Hrs_Happy')
+    SHEET.worksheet('Happy').update('B1:E50', hrs_happy)
+    hrs_informed = SHEET.worksheet('Form responses 4').get('Hrs_Informed')
+    SHEET.worksheet('Informed').update('B1:E50', hrs_informed)
+    hrs_connected = SHEET.worksheet('Form responses 4').get('Hrs_Connected')
+    SHEET.worksheet('Connected').update('B1:E50', hrs_connected)
+    hrs_anxious = SHEET.worksheet('Form responses 4').get('Hrs_Anxious')
+    SHEET.worksheet('Anxious').update('B1:E50', hrs_anxious)
+    # number_of_rows = get_row_count('Hours Spent')
     cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
     totals = []
     # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
     for row in cell_range:
         for list_of_values in row:
             total = [(sum(map(int, list_of_values)))]
-            SHEET.worksheet('Hours Spent').update('Total Hours', total)
             totals.append(total)
-                
+
     print(totals)
-    # SHEET.worksheet('Hours Spent').update('Total Hours', [totals])
+    SHEET.worksheet('Hours Spent').update('Total_Hours', totals)
 
 
 def close_program():
