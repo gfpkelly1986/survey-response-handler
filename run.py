@@ -202,7 +202,10 @@ def get_responder_ages():
 
 def set_total_hours():
     """
-    A function to set the totals hours on social media
+    A function to get the total hrs spent on Social
+    Media from the Hours Spent worksheet and update
+    the totals coulmn, returns a list of lists
+    containing the new totals.
     """
     cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
     list_of_totals = []
@@ -216,44 +219,35 @@ def set_total_hours():
     return list_of_totals
 
 
-# def get_total_hrs():
-#     """
-#     A function to get the total hrs spent on Social
-#     Media from the Hours Spent worksheet.
-#     """
-#     cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
-#     # This list is a list of lists
-#     list_of_totals = []
-#     # This list is a list of integers for calculations
-#     int_totals = []
-#     for row in cell_range:
-#         for list_of_values in row:
-#             total = [(sum(map(int, list_of_values)))]
-#             list_of_totals.append(total)
-#             print(list_of_totals)
-#     for num in list_of_totals:
-#         for val in num:
-#             int_totals.append(val)
-#     print(int_totals)      
+def combine_age_related_data(list_of_totals):
+    """
+    A function to combine age related data into seperate tables.
+    """
+    int_totals = []
+    
+    for num in list_of_totals:
+        for val in num:
+            int_totals.append(val)
+    print(int_totals)      
 
-#     age_list = get_responder_ages()
-#     age_list = age_list[1:]
-#     print(age_list)
-#     age_ints = []
-#     for val in age_list:
-#         for age in val:
-#             age = int(age)
-#             age_ints.append(age)
-#             print(type(age))
-#     print(age_ints)
+    age_list = get_responder_ages()
+    age_list = age_list[1:]
+    print(age_list)
+    age_ints = []
+    for val in age_list:
+        for age in val:
+            age = int(age)
+            age_ints.append(age)
+            print(type(age))
+    print(age_ints)
 
-#     for num, total in age_ints, int_totals:
-#         if num <= 25 and total > 0:
-#             print(f'{num} Found num <= 25')
-#         elif num <= 45:
-#             print(f'{num} Found num <= 45')
-#         elif num <= 65:
-#             print(f'{num} Found num <= 65')
+    for num, total in age_ints, int_totals:
+        if num <= 25 and total > 0:
+            print(f'{num} Found num <= 25')
+        elif num <= 45:
+            print(f'{num} Found num <= 45')
+        elif num <= 65:
+            print(f'{num} Found num <= 65')
     
     # number_of_rows = get_row_count('Hours Spent')
     # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
@@ -266,6 +260,16 @@ def set_total_hours():
     # list_of_totals = []
     # for row in cell_range:
     #     if 
+    # cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
+    # # This list is a list of lists
+    # list_of_totals = []
+    # # This list is a list of integers for calculations
+    # int_totals = []
+    # for row in cell_range:
+    #     for list_of_values in row:
+    #         total = [(sum(map(int, list_of_values)))]
+    #         list_of_totals.append(total)
+    #         print(list_of_totals)
 
 
 def close_program():
@@ -286,7 +290,8 @@ def main():
     # present_options()
     # get_responder_ages()
     # get_total_hrs()
-    set_total_hours()
-
+    list_of_totals = set_total_hours()
+    combine_age_related_data(list_of_totals)
+    
 
 main()
