@@ -213,7 +213,7 @@ def set_total_hours():
         for list_of_values in row:
             total = [(sum(map(int, list_of_values)))]
             list_of_totals.append(total)
-    
+
     SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
     print(list_of_totals)
     return list_of_totals
@@ -224,11 +224,10 @@ def combine_age_related_data(list_of_totals):
     A function to combine age related data into seperate tables.
     """
     int_totals = []
-    
+
     for num in list_of_totals:
         for val in num:
             int_totals.append(val)
-    print(int_totals)      
 
     age_list = get_responder_ages()
     age_list = age_list[1:]
@@ -240,18 +239,19 @@ def combine_age_related_data(list_of_totals):
             age_ints.append(age)
             print(type(age))
     print(age_ints)
+    print(int_totals)
 
-    for num, total in age_ints, int_totals:
-        if num <= 25 and total > 0:
-            print(f'{num} Found num <= 25')
-        elif num <= 45:
-            print(f'{num} Found num <= 45')
-        elif num <= 65:
-            print(f'{num} Found num <= 65')
-    
+    cell_value = SHEET.worksheet('Hours Spent').acell('F2').value
+    totals = []
+    for x, y in zip(age_ints, int_totals):
+        if x <= 25 and y > 0:
+            totals.append(int(y))
+           
+    print(sum(totals))
+
     # number_of_rows = get_row_count('Hours Spent')
     # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
-    
+
     # SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
     # print(list_of_totals)
     # return list_of_totals
@@ -259,7 +259,7 @@ def combine_age_related_data(list_of_totals):
     # cell_range = SHEET.worksheet('Hours Spent').batch_get(['A1:A50'])
     # list_of_totals = []
     # for row in cell_range:
-    #     if 
+    #     if
     # cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
     # # This list is a list of lists
     # list_of_totals = []
