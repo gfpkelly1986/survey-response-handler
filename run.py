@@ -71,7 +71,7 @@ def validate_int_input(user_input):
     """
     A function to validate integer inputs
     """
-    int_options = [1, 2, 3, 4, 4, 6]
+    int_options = ['1', '2', '3', '4', '5', '6']
     while user_input not in int_options:
         print(f'Incorrect input: [{user_input}].\n')
         print(f'Valid Input = {int_options}\n')
@@ -105,7 +105,8 @@ def get_row_count(sheet):
 
 def show_full_responses():
     """
-    Get all the table responses
+    Get all the form respones and return a table
+    of the responses
     """
     print('Getting response data now...\n')
     print('Table of most recent responses:\n')
@@ -146,25 +147,29 @@ def present_options():
     user_choice = input('Which table would you like to see?\n')
 
     if validate_int_input(user_choice):
-        if user_choice == 1:
-            display_table(user_choice)
-        elif user_choice == 2:
-            display_table(user_choice)
-        elif user_choice == 3:
-            display_table(user_choice)
-        elif user_choice == 4:
-            display_table(user_choice)
-        elif user_choice == 5:
-            display_table(user_choice)
-        elif user_choice == 6:
-            display_table(user_choice)
+        if user_choice == '1':
+            print('Chose 1')
+            list_of_totals = set_total_hours()
+            combine_age_related_data(list_of_totals)
+        else:
+            print('Not working correctly')
+        # elif user_choice == 2:
+        #     display_table(user_choice)
+        # elif user_choice == 3:
+        #     display_table(user_choice)
+        # elif user_choice == 4:
+        #     display_table(user_choice)
+        # elif user_choice == 5:
+        #     display_table(user_choice)
+        # elif user_choice == 6:
+        #     display_table(user_choice)
 
 
-def display_table(user_choice):
-    """
-    A function that will pull the correct table of data
-    based on the choice entered by the user.
-    """
+# def display_table(user_choice):
+#     """
+#     A function that will pull the correct table of data
+#     based on the choice entered by the user.
+#     """
 
 
 def populate_tables(age_list):
@@ -196,7 +201,6 @@ def get_responder_ages():
     A function to get age data from what is your age column.
     """
     age_list = SHEET.worksheet('Form responses 4').get('Age_List')
-    print(age_list)
     return age_list
 
 
@@ -215,7 +219,6 @@ def set_total_hours():
             list_of_totals.append(total)
 
     SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
-    print(list_of_totals)
     return list_of_totals
 
 
@@ -231,15 +234,11 @@ def combine_age_related_data(list_of_totals):
 
     age_list = get_responder_ages()
     age_list = age_list[1:]
-    print(age_list)
     age_ints = []
     for val in age_list:
         for age in val:
             age = int(age)
             age_ints.append(age)
-            print(type(age))
-    print(age_ints)
-    print(int_totals)
 
     totals1 = []
     totals2 = []
@@ -255,10 +254,12 @@ def combine_age_related_data(list_of_totals):
     total_smedia_under25 = str((sum(totals1)))
     total_smedia_under45 = str((sum(totals2)))
     total_smedia_under65 = str((sum(totals3)))
-    totals = [[total_smedia_under25], [total_smedia_under45], [total_smedia_under65]]
-    print(totals)
-    SHEET.worksheet('Useful Data').update('Total_Smedia_Hours', totals)
+    totals = [
+        [total_smedia_under25],
+        [total_smedia_under45],
+        [total_smedia_under65]]
 
+    SHEET.worksheet('Useful Data').update('Total_Smedia_Hours', totals)
     hours_per_age_group = SHEET.worksheet('Useful Data').get('A31:B35')
     print(tabulate(hours_per_age_group, tablefmt="grid"))
 
@@ -297,14 +298,15 @@ def main():
     """
     This is the main function that controls the general flow of the program
     """
-    # begin_program()
-    # age_list = get_responder_ages()
-    # populate_tables(age_list)
-    # present_options()
+    begin_program()
+    age_list = get_responder_ages()
+    populate_tables(age_list)
+
+    present_options()
+    # list_of_totals = set_total_hours()
+    # combine_age_related_data(list_of_totals)
     # get_responder_ages()
     # get_total_hrs()
-    list_of_totals = set_total_hours()
-    combine_age_related_data(list_of_totals)
 
 
 main()
