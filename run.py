@@ -111,7 +111,8 @@ def show_full_responses():
     Get all the form respones and return a table
     of the responses
     """
-    print('Getting response data now...\n')
+    print('Getting response data now\n')
+    print('This may take a moment...\n')
     print('Table of most recent responses:\n')
     batch_1 = SHEET.worksheet('Form responses 4').get_values(
         'Form_Responses_part_1')
@@ -153,7 +154,6 @@ def present_options():
 
     if validate_int_input(user_choice):
         if user_choice == '1':
-            print('Chose 1')
             list_of_totals = set_total_hours()
             get_age_related_hours(list_of_totals)
         else:
@@ -272,6 +272,62 @@ def get_age_related_hours(list_of_totals):
     print(tabulate(hours_per_age_group, tablefmt="grid"))
 
 
+def set_totals_for_feelings(column_values_list):
+    """
+    A function that will total and update all the responses
+    relating to happiness, connectedness, anxiousness
+    and Informedness so the program can later choose
+    a top performer in each category.
+    """
+    sheet1 = column_values_list[0]
+    sheet2 = column_values_list[1]
+    sheet3 = column_values_list[2]
+    sheet4 = column_values_list[3]
+    list1 = []
+    list2 = []
+    list3 = []
+    list4 = []
+
+    for a, b, c, d in zip(sheet1, sheet2, sheet3, sheet4):
+        for e, f, g, h in zip(a, b, c, d):
+            for i, j, k, l in zip(e, f, g, h):
+                list1.append(int(i))
+                list2.append(int(j))
+                list3.append(int(k))
+                list4.append(int(l))
+                
+    print(list1, list2, list3, list4)
+
+    # CONTINUE HERE 2-8-2022. Need to total each list in groups of 4 and
+    # append the lists to each sheet.
+
+
+def get_column_values():
+    """
+    A function to return a list of lists
+    containing column values for all 'feelings'
+    responses in the SurveyResponseForm worksheets
+    relating to feelings when using social media.
+
+    """
+    column_values_list = []
+    col_values_happy = SHEET.worksheet('Happy').batch_get(
+        ['B2:B50', 'C2:C50', 'D2:D50', 'E2:E50'])
+    col_values_connected = SHEET.worksheet('Informed').batch_get(
+        ['B2:B50', 'C2:C50', 'D2:D50', 'E2:E50'])
+    col_values_informed = SHEET.worksheet('Connected').batch_get(
+        ['B2:B50', 'C2:C50', 'D2:D50', 'E2:E50'])
+    col_values_anxious = SHEET.worksheet('Anxious').batch_get(
+        ['B2:B50', 'C2:C50', 'D2:D50', 'E2:E50'])
+
+    column_values_list.append(col_values_happy)
+    column_values_list.append(col_values_connected)
+    column_values_list.append(col_values_informed)
+    column_values_list.append(col_values_anxious)
+
+    return column_values_list
+
+
 def close_program():
     """
     Function to close the program.
@@ -284,10 +340,13 @@ def main():
     """
     This is the main function that controls the general flow of the program
     """
-    begin_program()
-    age_list = get_responder_ages()
-    populate_tables(age_list)
-    present_options()
+    # begin_program()
+    # age_list = get_responder_ages()
+    # populate_tables(age_list)
+    # present_options()
+    # Complete to here!!! Do not alter the above functions!!!
+    column_values_list = get_column_values()
+    set_totals_for_feelings(column_values_list)
 
 
 main()
