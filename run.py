@@ -56,7 +56,7 @@ def begin_program():
 
 def validate_str_input(user_input):
     """
-    Function to validate users input of y or n.
+    A function to validate users input of y or n.
     """
     str_options = ['y', 'n', 'Y', 'N']
     while user_input not in str_options:
@@ -83,7 +83,8 @@ def validate_int_input(user_input):
 def response_counter():
     """
     Keeps a running total of how many responses there
-    have been and returns this value.
+    have been and returns this value. This value is
+    stored in the worksheet 'Form responses 4' in cell 'W:2'
     """
     # all_values = SHEET.worksheet('Form Responses').get_all_values()
     # row_total = int(len(all_values)) - 1
@@ -95,9 +96,11 @@ def response_counter():
 
 def get_row_count(sheet):
     """
-    Access the form responses and count the number of rows
+    Access the form responses and count the number of rows to
+    help assess if new rows have been added.
+    If there are new rows the row count will be greater than
+    the value returned from response_counter().
     """
-    # existing_responses = int(response_counter())
     all_values = SHEET.worksheet(sheet).get_all_values()
     row_count = int(len(all_values)) - 1
     return row_count
@@ -138,7 +141,9 @@ def show_full_responses():
 
 def present_options():
     """
-    A function to display choices of sorted data tables.
+    A function to display choices to the user to select
+    one of 6 sorted data tables based on their input choice
+    of '1' '2' '3' '4' '5' '6'.
     """
     print('\nChoose an option below to see organised data.\n\n')
 
@@ -150,7 +155,7 @@ def present_options():
         if user_choice == '1':
             print('Chose 1')
             list_of_totals = set_total_hours()
-            combine_age_related_data(list_of_totals)
+            get_age_related_hours(list_of_totals)
         else:
             print('Not working correctly')
         # elif user_choice == 2:
@@ -181,7 +186,6 @@ def populate_tables(age_list):
     age_list = get_responder_ages()
     hours_spent_values = SHEET.worksheet('Form responses 4').get('B1:F50')
     SHEET.worksheet('Hours Spent').update('A1:E50', hours_spent_values)
-    # age_list = SHEET.worksheet('Hours Spent').get('Age_List')
     SHEET.worksheet('Happy').update('A1:A50', age_list)
     SHEET.worksheet('Anxious').update('A1:A50', age_list)
     SHEET.worksheet('Connected').update('A1:A50', age_list)
@@ -198,7 +202,9 @@ def populate_tables(age_list):
 
 def get_responder_ages():
     """
-    A function to get age data from what is your age column.
+    A function to get age data from the 'what is your age'
+    in the form responses worksheet column and return this
+    data.
     """
     age_list = SHEET.worksheet('Form responses 4').get('Age_List')
     return age_list
@@ -222,9 +228,11 @@ def set_total_hours():
     return list_of_totals
 
 
-def combine_age_related_data(list_of_totals):
+def get_age_related_hours(list_of_totals):
     """
-    A function to combine age related data into seperate tables.
+    A function to combine age related data in relation
+    to hours spent on social media into seperate tables
+    and print a filtered table to the terminal.
     """
     int_totals = []
 
@@ -263,28 +271,6 @@ def combine_age_related_data(list_of_totals):
     hours_per_age_group = SHEET.worksheet('Useful Data').get('A31:B35')
     print(tabulate(hours_per_age_group, tablefmt="grid"))
 
-    # number_of_rows = get_row_count('Hours Spent')
-    # cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
-
-    # SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
-    # print(list_of_totals)
-    # return list_of_totals
-
-    # cell_range = SHEET.worksheet('Hours Spent').batch_get(['A1:A50'])
-    # list_of_totals = []
-    # for row in cell_range:
-    #     if
-    # cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
-    # # This list is a list of lists
-    # list_of_totals = []
-    # # This list is a list of integers for calculations
-    # int_totals = []
-    # for row in cell_range:
-    #     for list_of_values in row:
-    #         total = [(sum(map(int, list_of_values)))]
-    #         list_of_totals.append(total)
-    #         print(list_of_totals)
-
 
 def close_program():
     """
@@ -301,12 +287,34 @@ def main():
     begin_program()
     age_list = get_responder_ages()
     populate_tables(age_list)
-
     present_options()
-    # list_of_totals = set_total_hours()
-    # combine_age_related_data(list_of_totals)
-    # get_responder_ages()
-    # get_total_hrs()
 
 
 main()
+
+
+# list_of_totals = set_total_hours()
+# get_age_related_hours(list_of_totals)
+# get_responder_ages()
+# get_total_hrs()
+# number_of_rows = get_row_count('Hours Spent')
+# cell_list = SHEET.worksheet('Hours Spent').range('F2:F50')
+
+# SHEET.worksheet('Hours Spent').update('Total_Hours', list_of_totals)
+# print(list_of_totals)
+# return list_of_totals
+
+# cell_range = SHEET.worksheet('Hours Spent').batch_get(['A1:A50'])
+# list_of_totals = []
+# for row in cell_range:
+#     if
+# cell_range = SHEET.worksheet('Hours Spent').batch_get(['B2:E50'])
+# # This list is a list of lists
+# list_of_totals = []
+# # This list is a list of integers for calculations
+# int_totals = []
+# for row in cell_range:
+#     for list_of_values in row:
+#         total = [(sum(map(int, list_of_values)))]
+#         list_of_totals.append(total)
+#         print(list_of_totals)
