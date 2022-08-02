@@ -5,6 +5,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
+from operator import itemgetter
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -295,8 +296,31 @@ def set_totals_for_feelings(column_values_list):
                 list2.append(int(j))
                 list3.append(int(k))
                 list4.append(int(l))
-                
-    print(list1, list2, list3, list4)
+    sheet1 = list1
+    sheet2 = list2
+    sheet3 = list3
+    sheet4 = list4
+
+    get = itemgetter(slice(0, 4), slice(4, 8), slice(8, 12), slice(12, 16))
+    sheet1_col_totals = get(sheet1)
+    sheet2_col_totals = get(sheet2)
+    sheet3_col_totals = get(sheet3)
+    sheet4_col_totals = get(sheet4)
+
+    sheet1_col_totals = [str(sum(x)) for x in sheet1_col_totals]
+    sheet2_col_totals = [str(sum(x)) for x in sheet2_col_totals]
+    sheet3_col_totals = [str(sum(x)) for x in sheet3_col_totals]
+    sheet4_col_totals = [str(sum(x)) for x in sheet4_col_totals]
+
+    print(sheet1_col_totals)
+    print(sheet2_col_totals)
+    print(sheet3_col_totals)
+    print(sheet4_col_totals)
+
+    SHEET.worksheet('Happy').update('Happy_Totals', [sheet1_col_totals])
+    SHEET.worksheet('Informed').update('Informed_Totals', [sheet2_col_totals])
+    SHEET.worksheet('Connected').update('Connected_Totals', [sheet3_col_totals])
+    SHEET.worksheet('Anxious').update('Anxious_Totals', [sheet4_col_totals])
 
     # CONTINUE HERE 2-8-2022. Need to total each list in groups of 4 and
     # append the lists to each sheet.
