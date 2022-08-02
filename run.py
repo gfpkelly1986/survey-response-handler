@@ -319,8 +319,15 @@ def set_totals_for_feelings(column_values_list):
 
     SHEET.worksheet('Happy').update('Happy_Totals', [sheet1_col_totals])
     SHEET.worksheet('Informed').update('Informed_Totals', [sheet2_col_totals])
-    SHEET.worksheet('Connected').update('Connected_Totals', [sheet3_col_totals])
+    SHEET.worksheet('Connected').update(
+        'Connected_Totals', [sheet3_col_totals])
     SHEET.worksheet('Anxious').update('Anxious_Totals', [sheet4_col_totals])
+
+    return [
+        sheet1_col_totals,
+        sheet2_col_totals,
+        sheet3_col_totals,
+        sheet4_col_totals]
 
     # CONTINUE HERE 2-8-2022. Need to total each list in groups of 4 and
     # append the lists to each sheet.
@@ -332,6 +339,7 @@ def get_column_values():
     containing column values for all 'feelings'
     responses in the SurveyResponseForm worksheets
     relating to feelings when using social media.
+    This is data from 4 columns in 4 different sheets.
 
     """
     column_values_list = []
@@ -364,13 +372,13 @@ def main():
     """
     This is the main function that controls the general flow of the program
     """
-    # begin_program()
-    # age_list = get_responder_ages()
-    # populate_tables(age_list)
-    # present_options()
+    begin_program()
+    age_list = get_responder_ages()
+    populate_tables(age_list)
+    present_options()
     # Complete to here!!! Do not alter the above functions!!!
-    column_values_list = get_column_values()
-    set_totals_for_feelings(column_values_list)
+    # column_values_list = get_column_values()
+    # set_totals_for_feelings(column_values_list)
 
 
 main()
