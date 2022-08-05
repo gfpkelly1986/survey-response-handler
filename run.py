@@ -4,6 +4,7 @@
 
 from operator import itemgetter
 import gspread
+import sys
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 
@@ -37,7 +38,6 @@ def begin_program():
                 new_responses = get_row_count('Form responses 4')
                 print(f'There are now {new_responses} responses')
                 if new_responses > previous_responses:
-                    # print('There are new responses to your survey.\n')
                     print('Would you like a table of the responses?\n\n')
                     second_response = input('y/n\n')
                     print('\n')
@@ -151,110 +151,111 @@ def present_options():
           'Option 5: Leading platform for Informedness\n\n')
 
     user_choice = input('Which option would you like to see?\n')
-    while True:
-        if validate_int_input(user_choice):
-            if user_choice == '1':
-                list_of_totals = set_total_hours()
-                get_age_related_hours(list_of_totals)
 
-                while True:
-                    continue_with_options = input(
-                        'Do you want to see more options?\n')
-                    if validate_str_input(continue_with_options):
-                        if continue_with_options in ['y', 'Y']:
-                            present_options()
-                        elif continue_with_options in ['n', 'N']:
-                            close_program()
+    if validate_int_input(user_choice):
+        if user_choice == '1':
+            list_of_totals = set_total_hours()
+            get_age_related_hours(list_of_totals)
 
-            elif user_choice == '2':
-                column_values_list = get_column_values()
-                leading_platforms = set_totals_for_feelings(column_values_list)
+            while True:
+                continue_with_options = input(
+                    'Do you want to see more options?\n')
+                if validate_str_input(continue_with_options):
+                    if continue_with_options in ['y', 'Y']:
+                        present_options()
+                    elif continue_with_options in ['n', 'N']:
+                        close_program()
 
-                platform_dict = {
-                    'Facebook': (leading_platforms[0][0][0]),
-                    'Instagram': (leading_platforms[0][0][1]),
-                    'Twitter': (leading_platforms[0][0][2]),
-                    'Linked-In': (leading_platforms[0][0][3])
-                }
+        elif user_choice == '2':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
 
-                top_platform = max(platform_dict, key=platform_dict.get)
-                print(f'{top_platform} is the top Social Media platform\n'
-                    f'for feelings of happiness when used.\n')
-                while True:
-                    continue_with_options = input(
-                        'Do you want to see more options?\n')
-                    if validate_str_input(continue_with_options):
-                        if continue_with_options in ['y', 'Y']:
-                            present_options()
-                        elif continue_with_options in ['n', 'N']:
-                            close_program()
-            elif user_choice == '3':
-                column_values_list = get_column_values()
-                leading_platforms = set_totals_for_feelings(column_values_list)
-                platform_dict = {
-                    'Facebook': (leading_platforms[1][0][0]),
-                    'Instagram': (leading_platforms[1][0][1]),
-                    'Twitter': (leading_platforms[1][0][2]),
-                    'Linked-In': (leading_platforms[1][0][3])
-                }
+            platform_dict = {
+                'Facebook': (leading_platforms[0][0][0]),
+                'Instagram': (leading_platforms[0][0][1]),
+                'Twitter': (leading_platforms[0][0][2]),
+                'Linked-In': (leading_platforms[0][0][3])
+            }
 
-                top_platform = max(platform_dict, key=platform_dict.get)
-                print(f'{top_platform} is the top Social Media platform\n'
-                    f'for feelings of Informedness when used.')
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of happiness when used.\n')
+            while True:
+                continue_with_options = input(
+                    'Do you want to see more options?\n')
+                if validate_str_input(continue_with_options):
+                    if continue_with_options in ['y', 'Y']:
+                        present_options()
+                    elif continue_with_options in ['n', 'N']:
+                        close_program()
+        elif user_choice == '3':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
+            platform_dict = {
+                'Facebook': (leading_platforms[1][0][0]),
+                'Instagram': (leading_platforms[1][0][1]),
+                'Twitter': (leading_platforms[1][0][2]),
+                'Linked-In': (leading_platforms[1][0][3])
+            }
 
-                while True:
-                    continue_with_options = input(
-                        'Do you want to see more options?\n')
-                    if validate_str_input(continue_with_options):
-                        if continue_with_options in ['y', 'Y']:
-                            present_options()
-                        elif continue_with_options in ['n', 'N']:
-                            close_program()
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of Informedness when used.')
 
-            elif user_choice == '4':
-                column_values_list = get_column_values()
-                leading_platforms = set_totals_for_feelings(column_values_list)
-                platform_dict = {
-                    'Facebook': (leading_platforms[2][0][0]),
-                    'Instagram': (leading_platforms[2][0][1]),
-                    'Twitter': (leading_platforms[2][0][2]),
-                    'Linked-In': (leading_platforms[2][0][3])
-                }
+            while True:
+                continue_with_options = input(
+                    'Do you want to see more options?\n')
+                if validate_str_input(continue_with_options):
+                    if continue_with_options in ['y', 'Y']:
+                        present_options()
+                    elif continue_with_options in ['n', 'N']:
+                        close_program()
 
-                top_platform = max(platform_dict, key=platform_dict.get)
-                print(f'{top_platform} is the top Social Media platform\n'
-                    f'for feelings of Connectedness when used.')
+        elif user_choice == '4':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
+            platform_dict = {
+                'Facebook': (leading_platforms[2][0][0]),
+                'Instagram': (leading_platforms[2][0][1]),
+                'Twitter': (leading_platforms[2][0][2]),
+                'Linked-In': (leading_platforms[2][0][3])
+            }
 
-                while True:
-                    continue_with_options = input(
-                        'Do you want to see more options?\n')
-                    if validate_str_input(continue_with_options):
-                        if continue_with_options in ['y', 'Y']:
-                            present_options()
-                        elif continue_with_options in ['n', 'N']:
-                            close_program()
-            elif user_choice == '5':
-                column_values_list = get_column_values()
-                leading_platforms = set_totals_for_feelings(column_values_list)
-                platform_dict = {
-                    'Facebook': (leading_platforms[3][0][0]),
-                    'Instagram': (leading_platforms[3][0][1]),
-                    'Twitter': (leading_platforms[3][0][2]),
-                    'Linked-In': (leading_platforms[3][0][3])
-                }
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of Connectedness when used.')
 
-                top_platform = max(platform_dict, key=platform_dict.get)
-                print(f'{top_platform} is the top Social Media platform\n'
-                    f'for feelings of Anxiousness when used.')
-                while True:
-                    continue_with_options = input(
-                        'Do you want to see more options?\n')
-                    if validate_str_input(continue_with_options):
-                        if continue_with_options in ['y', 'Y']:
-                            present_options()
-                        elif continue_with_options in ['n', 'N']:
-                            close_program()
-        break
+            while True:
+                continue_with_options = input(
+                    'Do you want to see more options?\n')
+                if validate_str_input(continue_with_options):
+                    if continue_with_options in ['y', 'Y']:
+                        present_options()
+                    elif continue_with_options in ['n', 'N']:
+                        close_program()
+        elif user_choice == '5':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
+            platform_dict = {
+                'Facebook': (leading_platforms[3][0][0]),
+                'Instagram': (leading_platforms[3][0][1]),
+                'Twitter': (leading_platforms[3][0][2]),
+                'Linked-In': (leading_platforms[3][0][3])
+            }
+
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of Anxiousness when used.')
+            while True:
+                continue_with_options = input(
+                    'Do you want to see more options?\n')
+                if validate_str_input(continue_with_options):
+                    if continue_with_options in ['y', 'Y']:
+                        present_options()
+                    elif continue_with_options in ['n', 'N']:
+                        close_program()
+    else:
+        present_options()
 
 
 def populate_tables(age_list):
@@ -436,7 +437,7 @@ def close_program():
     Function to close the program.
     """
     print('Closing the program now...')
-    quit()
+    sys.exit()
 
 
 def main():
