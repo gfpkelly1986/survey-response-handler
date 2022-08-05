@@ -4,6 +4,7 @@
 
 from operator import itemgetter
 import sys
+import pyfiglet
 import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
@@ -29,6 +30,8 @@ def begin_program():
     is stored in 'Cell W2' in Form Responses 4 worksheet.
     If not it will close the program.
     """
+    title = pyfiglet.figlet_format('Survey Response Handler', font='slant')
+    print(title)
     while True:
         print('Welcome to your Survey Response Handler. \n')
         first_response = input(
