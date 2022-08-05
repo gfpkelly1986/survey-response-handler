@@ -3,8 +3,8 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 from operator import itemgetter
-import gspread
 import sys
+import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 
@@ -22,9 +22,12 @@ SHEET = GSPREAD_CLIENT.open('SurveyResponseForm')
 
 def begin_program():
     """
-    This function will run, welcome the user and take a response from them
-    If they want to see their form responses it will call get_row_count
-    If not it will close the program
+    This function will run, welcome the user and take an initial
+    response from them.
+    If they want to check for form responses it will call get_row_count
+    and check for new responses against a responsecounter variable which
+    is stored in 'Cell W2' in Form Responses 4 worksheet.
+    If not it will close the program.
     """
     while True:
         print('Welcome to your Survey Response Handler. \n')
@@ -46,6 +49,12 @@ def begin_program():
                             full_form = show_full_responses()
                             print(full_form)
                             print('Gathering data to present options...')
+                            # The response counter is blocked so the form can
+                            # be tested repeatedly
+                            # SHEET.worksheet('Form responses 4').update_acell
+                            # ('W2', new_responses)
+                            # End of this function. After the full table
+                            # is presented.
                             break
                         elif second_response in ['n', 'N']:
                             close_program()
@@ -56,7 +65,7 @@ def begin_program():
 
 def validate_str_input(user_input):
     """
-    A function to validate users input of y or n.
+    A function to validate users string inputs of y or n.
     """
     str_options = ['y', 'n', 'Y', 'N']
     while user_input not in str_options:
@@ -69,9 +78,11 @@ def validate_str_input(user_input):
 
 def validate_int_input(user_input):
     """
-    A function to validate integer inputs
+    A function to validate integer inputs.
+    This is used to validate the 5 options of organised
+    data presented to the user.
     """
-    int_options = ['1', '2', '3', '4', '5', '6']
+    int_options = ['1', '2', '3', '4', '5']
     while user_input not in int_options:
         print(f'Incorrect input: [{user_input}].\n')
         print(f'Valid Input = {int_options}\n')
@@ -84,7 +95,7 @@ def response_counter():
     """
     Keeps a running total of how many responses there
     have been and returns this value. This value is
-    stored in the worksheet 'Form responses 4' in cell 'W:2'
+    stored in the worksheet 'Form responses 4' in cell 'W2'
     """
     val = SHEET.worksheet('Form responses 4').acell('W2').value
     return val
@@ -104,8 +115,10 @@ def get_row_count(sheet):
 
 def show_full_responses():
     """
-    Get all the form respones and return a table
-    of the responses
+    Get all the form responses and return a table
+    of the responses. No data grouped or sorted yet
+    outside of how the form was designed to gather
+    the data.
     """
     print('Getting response data now\n')
     print('This may take a moment...\n')
@@ -139,8 +152,10 @@ def show_full_responses():
 def present_options():
     """
     A function to display choices to the user to select
-    one of 6 sorted data tables based on their input choice
-    of '1' '2' '3' '4' '5'.
+    one of 5 sorted data options based on their input choice
+    of '1' '2' '3' '4' '5'. One displays a age related table
+    of data, the others are top performers in each category
+    of question type related to feelings.
     """
     print('\nChoose an option below to see organised data.\n\n')
 
@@ -285,7 +300,7 @@ def get_responder_ages():
     """
     A function to get age data from the 'what is your age'
     in the form responses worksheet column and return this
-    data.
+    data. This is used to group age related data together.
     """
     age_list = SHEET.worksheet('Form responses 4').get('Age_List')
     return age_list
@@ -369,13 +384,16 @@ def set_totals_for_feelings(column_values_list):
     list3 = []
     list4 = []
 
-    for a, b, c, d in zip(sheet1, sheet2, sheet3, sheet4):
-        for e, f, g, h in zip(a, b, c, d):
-            for i, j, k, l in zip(e, f, g, h):
-                list1.append(int(i))
-                list2.append(int(j))
-                list3.append(int(k))
-                list4.append(int(l))
+    # This loop is unpacking 4 rows and 4 columns from 4 sheets.
+    # Short variable names are used to stay within 80 characters.
+    # These variables have no other use.
+    for a_1, b_2, c_3, d_4 in zip(sheet1, sheet2, sheet3, sheet4):
+        for e_5, f_6, g_7, h_8 in zip(a_1, b_2, c_3, d_4):
+            for i_9, j_10, k_11, l_12 in zip(e_5, f_6, g_7, h_8):
+                list1.append(int(i_9))
+                list2.append(int(j_10))
+                list3.append(int(k_11))
+                list4.append(int(l_12))
     sheet1 = list1
     sheet2 = list2
     sheet3 = list3
@@ -409,9 +427,12 @@ def get_column_values():
     """
     A function to return a list of lists
     containing column values for all 'feelings'
-    responses in the SurveyResponseForm worksheets
-    relating to feelings when using social media.
-    This is data from 4 columns in 4 different sheets.
+    responses in the Form responses 4 worksheet.
+    These questions relate to feelings when using
+    certain social media platforms.
+    This is data from 4 columns in each category of
+    question in the main responses form. It built
+    to handle 50 responses.
 
     """
     column_values_list = []
@@ -436,6 +457,7 @@ def close_program():
     """
     Function to close the program.
     """
+    print('Thank you for using Survey Response Handler!\n')
     print('Closing the program now...')
     sys.exit()
 
