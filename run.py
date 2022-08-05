@@ -195,11 +195,29 @@ def present_options():
         elif user_choice == '4':
             column_values_list = get_column_values()
             leading_platforms = set_totals_for_feelings(column_values_list)
-            print(leading_platforms[2])
+            platform_dict = {
+                'Facebook': (leading_platforms[2][0][0]),
+                'Instagram': (leading_platforms[2][0][1]),
+                'Twitter': (leading_platforms[2][0][2]),
+                'Linked-In': (leading_platforms[2][0][3])
+            }
+
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of Connectedness when used.')
         elif user_choice == '5':
             column_values_list = get_column_values()
             leading_platforms = set_totals_for_feelings(column_values_list)
-            print(leading_platforms[2])
+            platform_dict = {
+                'Facebook': (leading_platforms[3][0][0]),
+                'Instagram': (leading_platforms[3][0][1]),
+                'Twitter': (leading_platforms[3][0][2]),
+                'Linked-In': (leading_platforms[3][0][3])
+            }
+
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of Anxiousness when used.')
 
 
 def populate_tables(age_list):
@@ -388,9 +406,9 @@ def main():
     """
     This is the main function that controls the general flow of the program
     """
-    # begin_program()
-    # age_list = get_responder_ages()
-    # populate_tables(age_list)
+    begin_program()
+    age_list = get_responder_ages()
+    populate_tables(age_list)
     present_options()
     # Complete to here!!! Do not alter the above functions!!!
 
