@@ -45,8 +45,8 @@ def begin_program():
                         if second_response in ['y', 'Y']:
                             full_form = show_full_responses()
                             print(full_form)
-                            SHEET.worksheet('Form responses 4').update(
-                                'W2', new_responses)
+                            # SHEET.worksheet('Form responses 4').update(
+                            #     'W2', new_responses)
                             break
                         elif second_response in ['n', 'N']:
                             close_program()
@@ -145,37 +145,61 @@ def present_options():
     """
     A function to display choices to the user to select
     one of 6 sorted data tables based on their input choice
-    of '1' '2' '3' '4' '5' '6'.
+    of '1' '2' '3' '4' '5'.
     """
     print('\nChoose an option below to see organised data.\n\n')
 
-    print('Option 1: Time spent on Social Media per age group')
+    print('Option 1: Time spent on Social Media per age group\n'
+          'Option 2: Leading Platform for Happiness\n'
+          'Option 3: Leading Platform for Connectedness\n'
+          'Option 4: Leading Platform for Anxiousness\n'
+          'Option 5: Leading platform for Informedness\n\n')
 
-    user_choice = input('Which table would you like to see?\n')
+    user_choice = input('Which option would you like to see?\n')
 
     if validate_int_input(user_choice):
         if user_choice == '1':
             list_of_totals = set_total_hours()
             get_age_related_hours(list_of_totals)
-        else:
-            print('Not working correctly')
-        # elif user_choice == 2:
-        #     display_table(user_choice)
-        # elif user_choice == 3:
-        #     display_table(user_choice)
-        # elif user_choice == 4:
-        #     display_table(user_choice)
-        # elif user_choice == 5:
-        #     display_table(user_choice)
-        # elif user_choice == 6:
-        #     display_table(user_choice)
+        # else:
+        # print('Not working correctly')
+        elif user_choice == '2':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
 
+            platform_dict = {
+                'Facebook': (leading_platforms[0][0][0]),
+                'Instagram': (leading_platforms[0][0][1]),
+                'Twitter': (leading_platforms[0][0][2]),
+                'Linked-In': (leading_platforms[0][0][3])
+            }
 
-# def display_table(user_choice):
-#     """
-#     A function that will pull the correct table of data
-#     based on the choice entered by the user.
-#     """
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of happiness when used.')
+
+        elif user_choice == '3':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
+            platform_dict = {
+                'Facebook': (leading_platforms[1][0][0]),
+                'Instagram': (leading_platforms[1][0][1]),
+                'Twitter': (leading_platforms[1][0][2]),
+                'Linked-In': (leading_platforms[1][0][3])
+            }
+
+            top_platform = max(platform_dict, key=platform_dict.get)
+            print(f'{top_platform} is the top Social Media platform\n'
+                  f'for feelings of Informedness when used.')
+            
+        elif user_choice == '4':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
+            print(leading_platforms[2])
+        elif user_choice == '5':
+            column_values_list = get_column_values()
+            leading_platforms = set_totals_for_feelings(column_values_list)
+            print(leading_platforms[2])
 
 
 def populate_tables(age_list):
@@ -312,11 +336,6 @@ def set_totals_for_feelings(column_values_list):
     sheet3_col_totals = [str(sum(x)) for x in sheet3_col_totals]
     sheet4_col_totals = [str(sum(x)) for x in sheet4_col_totals]
 
-    print(sheet1_col_totals)
-    print(sheet2_col_totals)
-    print(sheet3_col_totals)
-    print(sheet4_col_totals)
-
     SHEET.worksheet('Happy').update('Happy_Totals', [sheet1_col_totals])
     SHEET.worksheet('Informed').update('Informed_Totals', [sheet2_col_totals])
     SHEET.worksheet('Connected').update(
@@ -324,13 +343,10 @@ def set_totals_for_feelings(column_values_list):
     SHEET.worksheet('Anxious').update('Anxious_Totals', [sheet4_col_totals])
 
     return [
-        sheet1_col_totals,
-        sheet2_col_totals,
-        sheet3_col_totals,
-        sheet4_col_totals]
-
-    # CONTINUE HERE 2-8-2022. Need to total each list in groups of 4 and
-    # append the lists to each sheet.
+        [sheet1_col_totals],
+        [sheet2_col_totals],
+        [sheet3_col_totals],
+        [sheet4_col_totals]]
 
 
 def get_column_values():
@@ -372,13 +388,11 @@ def main():
     """
     This is the main function that controls the general flow of the program
     """
-    begin_program()
-    age_list = get_responder_ages()
-    populate_tables(age_list)
+    # begin_program()
+    # age_list = get_responder_ages()
+    # populate_tables(age_list)
     present_options()
     # Complete to here!!! Do not alter the above functions!!!
-    # column_values_list = get_column_values()
-    # set_totals_for_feelings(column_values_list)
 
 
 main()
