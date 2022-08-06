@@ -78,7 +78,7 @@ def validate_str_input(user_input):
 
 def validate_int_input(user_input):
     """
-    A function to validate integer inputs.
+    A function to validate numbers entered on the keyboard.
     This is used to validate the 5 options of organised
     data presented to the user.
     """

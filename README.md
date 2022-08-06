@@ -34,24 +34,43 @@ The limitations of an 80 character width in the terminal meant a lot of thought 
 
 # Live Features:
 - Ability to check the survey responses for new entries and see a table of all responses
+
 ![Checking for responses](assets/images/check-for-responses.PNG)
+
 ![Choice of table data](assets/images/choice-of-table.PNG)
+
 - Ability to update the sheet so it knows the new total of responses
+
 - View a table of all responses
+
 ![Full table of responses](assets/images/getting-table.PNG)
+
 - View age related data. How long various age categories spend on social media
+
 ![Age related data](assets/images/option1.PNG)
+
 - View top platform for feelings of happiness
+
 ![Top platform happy](assets/images/top-performer-happy.PNG)
+
 - View top platform for feelings of connectedness
+
 ![Top platform connected](assets/images/top-performer-connected.PNG)
+
 - View top platform for feelings of anxiousness
+
 ![Top platform anxious](assets/images/top-performer-anxious.PNG)
+
 - View top performer keeping users Informed
+
 ![Top platform informed](assets/images/top-performer-informed.PNG)
-- Input validation at beginning and during the program
+
+- Input validation at the beginning of the program. Validating string input for yes and no answers.
 
 ![Input validation at options list](assets/images/input-validation1.PNG)
+
+- Input validation when expecting inputs of ['1','2','3','4','5']
+
 ![Input validation 2 ](assets/images/input-validation2.PNG)
 - Ability to respond to new entries to the sheet. New totals and tables built and returned as new entries come in up to a limit of 50 responses.
 
