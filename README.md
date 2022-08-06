@@ -32,8 +32,26 @@ The limitations of an 80 character width in the terminal meant a lot of thought 
 ![The completed program functions part1](assets/images/final_functions1.PNG)
 ![The completed program functions part2](assets/images/final_functions2.PNG)
 
-# Live Features
-- 
+# Live Features:
+- Ability to check the survey responses for new entries and see a table of all responses
+![Checking for responses](assets/images/check-for-responses.PNG)
+![Choice of table data](assets/images/choice-of-table.PNG)
+- Ability to update the sheet so it knows the new total of responses
+- View a table of all responses
+![Full table of responses](assets/images/getting-table.PNG)
+- View age related data. How long various age categories spend on social media
+![Age related data](assets/images/option1.PNG)
+- View top platform for feelings of happiness
+![Top platform happy](assets/images/top-performer-happy.PNG)
+- View top platform for feelings of connectedness
+- View top platform for feelings of anxiousness
+- View top performer keeping users Informed
+- Input validation
+- Ability to respond to new entries to the sheet. New totals and tables built and returned as new entries come in up to a limit of 50 responses.
+
+# Desired Features:
+- Return tables of data in a leaderboard style of table so 2nd, 3rd and 4th in each category can also be seen clearly, not just the top performer for each category.
+- Ability to update the worksheets with comments relating to the organised data that was returned.
 
 
 
