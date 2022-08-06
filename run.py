@@ -55,8 +55,6 @@ def begin_program():
                             # be tested repeatedly
                             # SHEET.worksheet('Form responses 4').update_acell
                             # ('W2', new_responses)
-                            # End of this function. After the full table
-                            # is presented.
                             break
                         elif second_response in ['n', 'N']:
                             close_program()

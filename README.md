@@ -82,6 +82,47 @@ Link to site used: [PEP8 Online Checker](http://pep8online.com/checkresult)
 - Tabulate from tabulate
     This Library was used to display the full form and the age related form in tables in the terminal in a 'grid' format.
 
+# Record of Useful Python Methods Used:
+
+- The sum method for summing values from iterables.` sheet2_col_totals = [str(sum(x)) for x in sheet2_col_totals]` 
+
+- The batch_get() method of the gspread library which is very useful to reduce API calls: ` col_values_anxious = SHEET.worksheet('Anxious').batch_get(['B2:B50', 'C2:C50', 'D2:D50', 'E2:E50'])`
+
+- The itemgetter method from the itemgetter library, extremely useful for slicing large data structures: `get = itemgetter(slice(0, 4), slice(4, 8), slice(8, 12), slice(12, 16))` 
+
+- The map() method is used to apply a function on all the elements of specified iterable and return map object. It is used when you want to apply a single transformation to all the iterable elements`total = [(sum(map(int, list_of_values)))]`. This code converted all the string values contained within a list into integers so they could be summed in one line of code.
+
+-  The max method allowed me to get the highest values in the dictionary of social media platforms `platform_dict = {'Facebook': (leading_platforms[3][0][0]),'Instagram': (leading_platforms[3][0][1])'Twitter': (leading_platforms[3][0][2]),'Linked-In': (leading_platforms[3][0][3])}top_platform = max(platform_dict, key=platform_dict.get) top_platform = max(platform_dict, key=platform_dict.get)`. 
+    - Some documentation for this method can be found here: [max method](https://python-reference.readthedocs.io/en/latest/docs/functions/max.html)
+
+# Bugs During Development:
+
+- The biggest issue I had during this project was unpacking large data structres to get the values I needed for calculations. It also took some time to realise that when passing in [['one','two','three']]
+to the update function of the gspread library, it will attempt to fill a row of data. If you pass it 
+[['one'],['two'],['three']] it will attempt to fill a column of data. That took some time to figure out by testing various outputs in the terminal.
+
+- Small bug where my options were in the reverse order to how my method was returning them to the terminal.
+
+# Deployment
+
+- 3 Code Institute instructions that were noted before deployment:
+    - An extra key:value pair of port:8000 was required in Heroku.
+    - All input methods need \n at the end for the mock terminal to behave properly
+    - pip3 freeze > requirements.txt will put the required dependencies into the requirements.txt file so Heroku installs the correct library when it builds the application.
+
+- Main steps to deploy this project to Heroku:
+    1.  Make sure the most up to date files are pushed to github repository
+    2.  Create a new app from the Heroku dashboard.
+    3.  Application will need a name and a region selected
+    4.  Select the settings tab
+    5.  Convig vars = Enviornment variable. This is sensitve data! Creds.json goes in this field as follows: CREDS:creds.json
+    6.  Select 'Add buildpack' Order is important! Python must be on top of Node.js
+    7.  Go to the Deploy tab and select it.
+    8.  To connect your project to github, search your repository and click 'connect'
+    9.  Enable automatic deploys so each new git push command is recognised
+    10. Manually deploy from the main branch
+    11. Click view to see your deployed site.
+
 
 
 
