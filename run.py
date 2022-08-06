@@ -164,8 +164,8 @@ def present_options():
 
     print('Option 1: Time spent on Social Media per age group\n'
           'Option 2: Leading Platform for Happiness\n'
-          'Option 3: Leading Platform for Connectedness\n'
           'Option 4: Leading platform for Informedness\n'
+          'Option 3: Leading Platform for Connectedness\n'
           'Option 5: Leading Platform for Anxiousness\n\n')
 
     user_choice = input('Which option would you like to see?\n')
