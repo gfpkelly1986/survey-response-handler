@@ -59,6 +59,28 @@ The limitations of an 80 character width in the terminal meant a lot of thought 
 - Return tables of data in a leaderboard style of table so 2nd, 3rd and 4th in each category can also be seen clearly, not just the top performer for each category.
 - Ability to update the worksheets with comments relating to the organised data that was returned.
 
+# Validator Testing:
+-Testing for this application was done with the PEP8 online checker.
+Link to site used: [PEP8 Online Checker](http://pep8online.com/checkresult) 
+
+![Pep8 Online Validator](assets/images/pep8-validator-testing.PNG)
+
+# Libraries Used:
+- Operator from itemgetter
+    - This library was used on line 404 of run.py:
+    `get = itemgetter(slice(0, 4), slice(4, 8), slice(8, 12), slice(12, 16))`.
+    This allowed me to set up a variable that sliced a list at certain indexes in one line of code which greatly reduced the complexity of getting the values I needed. 
+    Some documentation for this library can be found at this link: [itemgetter](https://xxx-cook-book.gitbooks.io/python-cook-book/content/Sort/Operator.itemgetter.html)
+- Sys
+    - This library is used at line 458 to close the program using the exit method. `sys.exit()`.
+- Pyfiglet
+    - This library was used for the styled title at the beginning of the program. Documentation for pyfiglet can be found at this link: [pyfiglet](https://www.javatpoint.com/python-pyfiglet-module)
+- Gspread
+    - The gspread library was used to get and set data in the Google sheet. Documentation for gspread can be found at this link: [gpread](https://docs.gspread.org/en/v5.4.0/)
+- google.oauth2.service_account from credentials
+    - The credentials module from google.oauth allows the program to connect to Google Sheets via an API.
+- Tabulate from tabulate
+    This Library was used to display the full form and the age related form in tables in the terminal in a 'grid' format.
 
 
 
