@@ -44,9 +44,15 @@ The limitations of an 80 character width in the terminal meant a lot of thought 
 - View top platform for feelings of happiness
 ![Top platform happy](assets/images/top-performer-happy.PNG)
 - View top platform for feelings of connectedness
+![Top platform connected](assets/images/top-performer-connected.PNG)
 - View top platform for feelings of anxiousness
+![Top platform anxious](assets/images/top-performer-anxious.PNG)
 - View top performer keeping users Informed
-- Input validation
+![Top platform informed](assets/images/top-performer-informed.PNG)
+- Input validation at beginning and during the program
+
+![Input validation at options list](assets/images/input-validation1.PNG)
+![Input validation 2 ](assets/images/input-validation2.PNG)
 - Ability to respond to new entries to the sheet. New totals and tables built and returned as new entries come in up to a limit of 50 responses.
 
 # Desired Features:
