@@ -16,7 +16,24 @@ Link to the live application hosted on heroku: [Live site](https://survey-respon
 
 One important item to note is that there is a counter that is updated on lines 57-58 of run.py, this is commented out to allow the tester of this application to repeatedly run the program. The counter should update with the new row total so it can tell if the form has new survey responses or the data there has already been viwed. If the comments are removed the counter will function as intended.
 
+# Planning Process for This Project:
+Live link to published version of Lucid Chart: [Lucid Chart](https://lucid.app/publicSegments/view/af9a8c15-faaa-47e8-86e8-0fe8337d9484/image.jpeg)
 
+## Screenshot of Flow Chart Used for Planning:
+![Flow Chart for P3](assets/images/lucid-chart.PNG)
+
+To begin the planning process for this project I constructed a flow chart so that a clear picture could be established of what decisions the program would be required to make and when those decisions needed to occur. The creation of this chart allowed me to step through the journey a user would take while using the program. It also helped me to think and plan for what data I would need, what I could do with this data and how I might return it to the user. Additionally, once this flow chart was created it gave me a foundation to work from so I could better understand what functions I would need to create to get the behaviour I wanted from the program.
+The limitations of an 80 character width in the terminal meant a lot of thought had to go in to how the program might present this data.
+
+## Screenshot of First Draft of Function Creation:
+![Possible functions needed for program to work](assets/images/first_draft_functions.PNG)
+
+## How the Functions Evolved During Development:
+![The completed program functions part1](assets/images/final_functions1.PNG)
+![The completed program functions part2](assets/images/final_functions2.PNG)
+
+# Live Features
+- 
 
 
 

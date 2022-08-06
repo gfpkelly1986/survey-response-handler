@@ -312,7 +312,7 @@ def get_responder_ages():
 def set_total_hours():
     """
     A function to get the total hrs spent on Social
-    Media from the Hours Spent worksheet and update
+    Media from the Hours Spent worksheet and updates
     the totals coulmn, returns a list of lists
     containing the new totals.
     """
