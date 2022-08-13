@@ -14,7 +14,9 @@ Link to the live application hosted on heroku: [Live site](https://survey-respon
 
 ## Important Note:
 
-One important item to note is that there is a counter that is updated on lines 57-58 of run.py, this is commented out to allow the tester of this application to repeatedly run the program. The counter should update with the new row total so it can tell if the form has new survey responses or the data there has already been viewed. If the comments are removed the counter will function as intended.
+-   One important item to note is that there is a counter that is updated on lines 57-58 of run.py, this is commented out to allow the tester of this application to repeatedly run the program. The counter should update with the new row total so it can tell if the form has new survey responses or the data there has already been viewed. If the comments are removed the counter will function as intended.
+
+- Another item to note is that if you try to get the full table of responses back multiple times in under a minute you will exhuast the API requests and get an error returned. This is to avoid spamming the API. 
 
 # Table of Contents:
 
