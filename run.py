@@ -165,7 +165,7 @@ def present_options():
           'Option 4: Leading Platform for Connectedness\n'
           'Option 5: Leading Platform for Anxiousness\n\n')
 
-    user_choice = input('Which option would you like to see?\n')
+    user_choice = input('Which option would you like to see? (1 - 5)\n')
 
     if validate_int_input(user_choice):
         if user_choice == '1':
