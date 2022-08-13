@@ -14,7 +14,7 @@ Link to the live application hosted on heroku: [Live site](https://survey-respon
 
 ## Important Note
 
-One important item to note is that there is a counter that is updated on lines 57-58 of run.py, this is commented out to allow the tester of this application to repeatedly run the program. The counter should update with the new row total so it can tell if the form has new survey responses or the data there has already been viwed. If the comments are removed the counter will function as intended.
+One important item to note is that there is a counter that is updated on lines 57-58 of run.py, this is commented out to allow the tester of this application to repeatedly run the program. The counter should update with the new row total so it can tell if the form has new survey responses or the data there has already been viewed. If the comments are removed the counter will function as intended.
 
 # Planning Process for This Project:
 Live link to published version of Lucid Chart: [Lucid Chart](https://lucid.app/publicSegments/view/af9a8c15-faaa-47e8-86e8-0fe8337d9484/image.jpeg)
