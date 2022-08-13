@@ -34,7 +34,7 @@ One important item to note is that there is a counter that is updated on lines 5
 
 -   [Deployment](https://github.com/gfpkelly1986/survey-response-handler#deployment)
 
--   [Credits]()
+-   [Credits](https://github.com/gfpkelly1986/survey-response-handler#credits)
 
 
 # Planning Process for This Project:
