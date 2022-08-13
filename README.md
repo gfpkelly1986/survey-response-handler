@@ -12,9 +12,30 @@ Link to the Google Sheet storing the response data: [Google Sheets Link](https:/
 
 Link to the live application hosted on heroku: [Live site](https://survey-response-handler.herokuapp.com/)
 
-## Important Note
+## Important Note:
 
 One important item to note is that there is a counter that is updated on lines 57-58 of run.py, this is commented out to allow the tester of this application to repeatedly run the program. The counter should update with the new row total so it can tell if the form has new survey responses or the data there has already been viewed. If the comments are removed the counter will function as intended.
+
+# Table of Contents:
+
+-   [Planning](https://github.com/gfpkelly1986/survey-response-handler#planning-process-for-this-project)
+
+-   [Live Features](https://github.com/gfpkelly1986/survey-response-handler#live-features)
+
+-   [Desired Features](https://github.com/gfpkelly1986/survey-response-handler#desired-features)
+
+-   [Validator Testing](https://github.com/gfpkelly1986/survey-response-handler#validator-testing)
+
+-   [Libraries Used](https://github.com/gfpkelly1986/survey-response-handler#libraries-used)
+
+-   [Record of Useful Python Methods Used](https://github.com/gfpkelly1986/survey-response-handler#record-of-useful-python-methods-used)
+
+-   [Bugs During Development](https://github.com/gfpkelly1986/survey-response-handler#bugs-during-development)
+
+-   [Deployment](https://github.com/gfpkelly1986/survey-response-handler#deployment)
+
+-   [Credits]()
+
 
 # Planning Process for This Project:
 Live link to published version of Lucid Chart: [Lucid Chart](https://lucid.app/publicSegments/view/af9a8c15-faaa-47e8-86e8-0fe8337d9484/image.jpeg)
@@ -122,7 +143,7 @@ to the update function of the gspread library, it will attempt to fill a row of 
 
 - Small bug where my options were in the reverse order to how my method was returning them to the terminal.
 
-# Deployment
+# Deployment:
 
 - 3 Code Institute instructions that were noted before deployment:
     - An extra key:value pair of port:8000 was required in Heroku.
@@ -141,6 +162,10 @@ to the update function of the gspread library, it will attempt to fill a row of 
     9.  Enable automatic deploys so each new git push command is recognised
     10. Manually deploy from the main branch
     11. Click view to see your deployed site.
+
+# Credits:
+
+- The Code Institute provided the mock terminal used to display this project in the browser.
 
 
 
